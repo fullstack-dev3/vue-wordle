@@ -26,8 +26,9 @@ body {
   background: hsl(240, 3%, 7%);
   color: #fff;
   font-family: 'Clear Sans', Helvetica, Arial, sans-serif;
-  height: calc(100vh - 60px);
-  padding-top: 60px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
   text-align: center;
   width: 100%;
 }
