@@ -372,15 +372,20 @@ export default defineComponent({
 
       this.updateLetters(val);
 
-      for (let i = 0; i < 5; i++) {
-        if (val.charAt(i) === temp[i]) {
-          this.check[this.row - 1][i] = 1;
-        } else if (temp.includes(val.charAt(i))) {
-          this.check[this.row - 1][i] = 0;
-        } else {
-          this.check[this.row - 1][i] = -1;
+      temp.forEach((letter: string, index: number) => {
+        let foundIndex = -1;
+        for (let i = 0; i < 5; i++) {
+          if (letter === val.charAt(i) && i === index) {
+            if(foundIndex > -1) {
+              this.check[this.row - 1][foundIndex] = -2;
+            }
+            this.check[this.row - 1][i] = 1;
+          } else if (letter === val.charAt(i) && i !== index && temp[i] !== val.charAt(i)) {
+            foundIndex = i;
+            this.check[this.row - 1][i] = 0;
+          }
         }
-      }
+      });
 
       if (this.row === 6) {
         this.showAlert(false, 'Gameover! The word was ' + this.target + '... Refresh to restart', 3000);
