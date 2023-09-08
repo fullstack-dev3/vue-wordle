@@ -2,6 +2,15 @@
   <div class="wordle" :class="{ modalOpen: modal }">
     <div class="header">
       <h3>WORDLE</h3>
+      <div class="level-switch">
+        <select v-model="level" @change="changeLevel">
+          <option disabled value="">Select Level</option>
+          <option value="easy">Easy</option>
+          <option value="normal">Normal</option>
+          <option value="hard">Hard</option>
+          <option value="expert">Expert</option>
+        </select>
+      </div>
     </div>
 
     <div class="game">
@@ -384,7 +393,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import words from '../data/words.json';
-import targets from '../data/targets.json';
+import easy from '../data/easy.json';
+import normal from '../data/normal.json';
+import hard from '../data/hard.json';
 
 export default defineComponent({
   name: 'WordleComponent',
@@ -405,7 +416,7 @@ export default defineComponent({
       ],
       words: words,
       target: '',
-      targets: targets,
+      targets: easy,
       row: 1,
       alertMessage: '',
       alert: false,
@@ -413,6 +424,7 @@ export default defineComponent({
       guessRight: false,
       modal: true,
       modalText: '',
+      level: 'easy'
     }
   },
   beforeMount() {
@@ -445,6 +457,9 @@ export default defineComponent({
     });
   },
   methods: {
+    changeLevel() {
+      this.restartGame();
+    },
     restartGame() {
       this.letters = [-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2];
       this.guess = ['', '', '', '', '', ''];
@@ -458,8 +473,23 @@ export default defineComponent({
       ];
 
       this.words = words;
-      this.targets = targets;
-      this.target = this.targets[Math.floor(Math.random() * this.targets.length)]
+      switch (this.level) {
+        case "easy":
+          this.targets = easy;
+          break;
+        case "normal":
+          this.targets = easy.concat(normal);
+          break;
+        case "hard":
+          this.targets = easy.concat(normal, hard);
+          break;
+        case "expert":
+          this.targets = words;
+          break;
+        default:
+          break;
+      }
+      this.target = this.targets[Math.floor(Math.random() * this.targets.length)];
       this.row = 1;
       this.guessRight = false;
       this.modal = false;
@@ -632,6 +662,21 @@ export default defineComponent({
       left: 50%;
       position: absolute;
       transform: translateX(-50%);
+    }
+    .level-switch {
+      align-items: center;
+      display: flex;
+      float: right;
+      height: 55px;
+      margin-right: 20px;
+      select {
+        border-radius: 5px;
+        color: green;
+        font-size: 14px;
+        font-weight: bold;
+        height: 35px;
+        padding: 0 5px;
+      }
     }
   }
   .game {
