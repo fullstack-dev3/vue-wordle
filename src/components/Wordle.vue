@@ -396,6 +396,7 @@ import words from '../data/words.json';
 import easy from '../data/easy.json';
 import normal from '../data/normal.json';
 import hard from '../data/hard.json';
+import expert from '../data/expert.json';
 
 export default defineComponent({
   name: 'WordleComponent',
@@ -484,7 +485,7 @@ export default defineComponent({
           this.targets = easy.concat(normal, hard);
           break;
         case "expert":
-          this.targets = words;
+          this.targets = easy.concat(normal, hard, expert);
           break;
         default:
           break;
