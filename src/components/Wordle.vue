@@ -1,15 +1,17 @@
 <template>
   <div class="wordle" :class="{ modalOpen: modal }">
     <div class="header">
-      <h3>WORDLE</h3>
-      <div class="level-switch">
-        <select v-model="level" @change="changeLevel">
-          <option disabled value="">Select Level</option>
-          <option value="easy">Easy</option>
-          <option value="normal">Normal</option>
-          <option value="hard">Hard</option>
-          <option value="expert">Expert</option>
-        </select>
+      <div class="container">
+        <h3>WORDLE</h3>
+        <div class="level-switch">
+          <select v-model="level" @change="changeLevel">
+            <option disabled value="">Select Level</option>
+            <option value="easy">Easy</option>
+            <option value="normal">Normal</option>
+            <option value="hard">Hard</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -654,29 +656,26 @@ export default defineComponent({
     pointer-events: none;
   }
   .header {
-    width: 100%;
     height: 55px;
     border-bottom: 2px solid #545454;
-    margin: auto 0;
-    h3 {
-      display: inline-block;
-      left: 50%;
-      position: absolute;
-      transform: translateX(-50%);
-    }
-    .level-switch {
-      align-items: center;
+    .container {
       display: flex;
-      float: right;
-      height: 55px;
-      margin-right: 20px;
-      select {
-        border-radius: 5px;
-        color: green;
-        font-size: 14px;
-        font-weight: bold;
-        height: 35px;
-        padding: 0 5px;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 400px;
+      .level-switch {
+        align-items: center;
+        display: flex;
+        float: right;
+        height: 55px;
+        select {
+          border-radius: 5px;
+          color: green;
+          font-size: 14px;
+          font-weight: bold;
+          height: 35px;
+          padding: 0 5px;
+        }
       }
     }
   }

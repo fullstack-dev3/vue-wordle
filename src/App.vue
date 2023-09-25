@@ -1,5 +1,8 @@
 <template>
-  <Wordle />
+  <div class="loading" v-if="loading">
+    <img v-bind:src="require('./data/wordle.png')" />
+  </div>
+  <Wordle v-else />
 </template>
 
 <script lang="ts">
@@ -10,6 +13,16 @@ export default defineComponent({
   name: 'App',
   components: {
     Wordle
+  },
+  data() {
+    return {
+      loading: true
+    }
+  },
+  created() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
   }
 });
 </script>
@@ -31,5 +44,10 @@ body {
   overflow-y: auto;
   text-align: center;
   width: 100%;
+}
+.loading {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
 }
 </style>
