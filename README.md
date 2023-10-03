@@ -1,7 +1,7 @@
 # vue-wordle
 English Wordle game developed by Vue.js
 
-Visit website: [Wordle](https://vue-wordle-wheat.vercel.app)
+Visit website: [Play Wordle](https://play-wordle.vercel.app)
 
 ## Getting Started
 
